@@ -17,7 +17,7 @@ const mongoUrl = "mongodb://localhost:27017";
 const dbName = "hospitalDB";
 
 let db;
-MongoClient.connect(mongoUrl, { useUnifiedTopology: true })
+MongoClient.connect(mongoUrl)
   .then((client) => {
     db = client.db(dbName);
     console.log("MongoDB Connected");

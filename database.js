@@ -6,16 +6,18 @@ const client = new MongoClient(uri);
 
 let db;
 
-async function mongoConnect(callback) {
+async function connectToMongo() {
   try {
-    await client.connect();
-    db = client.db('hospitalBooking'); // database name
-    console.log('✅ MongoDB Connected to hospitalBooking');
-    callback();
+    const client = await MongoClient.connect(mongoUrl);
+    db = client.db(dbName);
+    console.log("✅ MongoDB Connected");
   } catch (err) {
-    console.error('❌ MongoDB connection failed:', err);
+    console.error("❌ MongoDB Connection Error:", err);
   }
 }
+
+connectToMongo();
+
 
 function getDb() {
   if (!db) {
