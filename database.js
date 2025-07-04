@@ -1,8 +1,8 @@
 // database.js
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb://127.0.0.1:27017'; // local MongoDB
-const client = new MongoClient(uri);
+const mongoUrl = "mongodb+srv://pooniakapil59:kapil%401234@cluster0.gg8h1st.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const dbName = "hospitalDB";
 
 let db;
 
@@ -10,23 +10,20 @@ async function connectToMongo() {
   try {
     const client = await MongoClient.connect(mongoUrl);
     db = client.db(dbName);
-    console.log("✅ MongoDB Connected");
+    console.log("✅ MongoDB Connected to hospitalDB");
   } catch (err) {
     console.error("❌ MongoDB Connection Error:", err);
   }
 }
 
-connectToMongo();
-
-
 function getDb() {
   if (!db) {
-    throw new Error('Database not initialized. Call mongoConnect first.');
+    throw new Error('Database not initialized. Call connectToMongo first.');
   }
   return db;
 }
 
 module.exports = {
-  mongoConnect,
-  getDb
+  connectToMongo,
+  getDb,
 };
